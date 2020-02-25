@@ -138,8 +138,8 @@ public abstract class Page extends HttpServlet implements Container {
 
 	protected String getTitle() {
 		String className = this.getClass().getSimpleName();
-		for(BlockEntry b : BlockEntry.values()) {
-			if(b.name().equals(className.toUpperCase()))
+		for (BlockEntry b : BlockEntry.values())
+			if (b.name().equals(className.toUpperCase()))
 				return BlockEntry.valueOf(className.toUpperCase()).name;
 		return className;
 	}
