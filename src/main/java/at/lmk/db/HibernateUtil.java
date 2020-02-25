@@ -13,9 +13,9 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistryBuilder;
 
 public class HibernateUtil {
-	private static final Configuration configuration = new Configuration().configure();
-	private static final SessionFactory sessionFactory = configuration.buildSessionFactory(new ServiceRegistryBuilder()
-			.applySettings(new Configuration().configure().getProperties()).buildServiceRegistry());
+	private static final Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+	private static final SessionFactory sessionFactory = configuration.buildSessionFactory(
+			new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry());
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
