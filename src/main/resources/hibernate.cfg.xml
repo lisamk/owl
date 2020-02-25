@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.password">f1vjSGzt183rz</property>
+  <property name="hibernate.connection.url">jdbc:mysql://owl.cpqhjjwu2vvf.us-east-2.rds.amazonaws.com:3306/owl</property>
+  <property name="hibernate.connection.username">lisa</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+  <mapping class="at.lmk.db.entities.User"/>
+ </session-factory>
+</hibernate-configuration>
