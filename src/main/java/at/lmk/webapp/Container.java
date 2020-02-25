@@ -25,7 +25,7 @@ public interface Container extends Tags {
 		List<DomContent> content = new ArrayList<>();
 		for (String[] line : collection)
 			content.add(tr(Arrays.stream(line).map(s -> td(s)).toArray(DomContent[]::new)));
-		return content.toArray(DomContent[]::new);
+		return content.toArray(new DomContent[content.size()]);
 	}
 
 	private DomContent getHeader(boolean show, String[] header) {

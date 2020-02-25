@@ -39,7 +39,7 @@ public class TableListImpl<T> implements TableList<T>, Container {
 
 	@Override
 	public String[] getHeadings() {
-		return columns.keySet().toArray(String[]::new);
+		return columns.keySet().toArray(new String[columns.size()]);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class TableListImpl<T> implements TableList<T>, Container {
 			List<String> field = new ArrayList<>();
 			for (TableColumn c : columns.values())
 				field.add(c.getContent(o));
-			dataList.add(field.toArray(String[]::new));
+			dataList.add(field.toArray(new String[dataList.size()]));
 		}
 		return dataList;
 	}
