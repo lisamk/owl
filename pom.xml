@@ -224,11 +224,6 @@
 	  <version>1.4.0</version>
     </dependency>
     <dependency>
-    	<groupId>com.oracle.ojdbc</groupId>
-    	<artifactId>ojdbc10</artifactId>
-    	<version>19.3.0.0</version>
-    </dependency>
-    <dependency>
     	<groupId>javax.servlet</groupId>
     	<artifactId>javax.servlet-api</artifactId>
     	<version>4.0.1</version>
@@ -238,7 +233,12 @@
     <artifactId>hibernate-core</artifactId>
     <version>4.1.4.Final</version>
 </dependency>
-    
+
+    <dependency>
+    	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>8.0.19</version>
+    </dependency>
   </dependencies>
   <build>
     <resources>
