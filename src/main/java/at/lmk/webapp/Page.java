@@ -138,8 +138,10 @@ public abstract class Page extends HttpServlet implements Container {
 
 	protected String getTitle() {
 		String className = this.getClass().getSimpleName();
-		return BlockEntry.valueOf(className.toUpperCase()) != null ? BlockEntry.valueOf(className.toUpperCase()).name
-				: className;
+		for(BlockEntry b : BlockEntry.values()) {
+			if(b.name().equals(className.toUpperCase()))
+				return BlockEntry.valueOf(className.toUpperCase()).name;
+		return className;
 	}
 
 	public DomContent[] getScripts() {
