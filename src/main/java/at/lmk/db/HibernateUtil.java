@@ -14,7 +14,7 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-	private static final Configuration configuration = new Configuration().configure(new File("./hibernate.cfg.xml"));
+	private static final Configuration configuration = new Configuration().configure(new File("hibernate.cfg.xml"));
 //	static {
 //		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 //		configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
