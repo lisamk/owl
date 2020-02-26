@@ -1,5 +1,8 @@
 package at.lmk.db;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -22,7 +25,12 @@ public class HibernateUtil {
 		configuration.setProperty("hibernate.connection.url",
 				"jdbc:mysql://owl.cpqhjjwu2vvf.us-east-2.rds.amazonaws.com:3306/owl");
 		configuration.setProperty("hibernate.connection.username", "lisa");
-		configuration.setProperty("hibernate.connection.password", "pw");
+		try {
+			configuration.setProperty("hibernate.connection.password",
+					new String(Files.readAllBytes(Paths.get("./hibpw.txt"))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 		configuration.addAnnotatedClass(User.class);
 	}
