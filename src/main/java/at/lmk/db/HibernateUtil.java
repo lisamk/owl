@@ -1,5 +1,6 @@
 package at.lmk.db;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -13,7 +14,7 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-	private static final Configuration configuration = new Configuration().configure("./hibernate.cfg.xml");
+	private static final Configuration configuration = new Configuration().configure(new File("./hibernate.cfg.xml"));
 //	static {
 //		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 //		configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
