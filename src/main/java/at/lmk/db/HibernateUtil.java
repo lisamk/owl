@@ -10,12 +10,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 public class HibernateUtil {
-	private static final Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-	private static final SessionFactory sessionFactory = configuration.buildSessionFactory(
-			new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry());
+//	private static final Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+	private static final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -41,20 +39,18 @@ public class HibernateUtil {
 		return performAction(s -> s.createQuery("From " + type.getName()).list());
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> void update(long entityId, Class<T> type, Consumer<T> consumer) {
 		performAction(s -> {
-			T t = (T) s.get(type, entityId);
+			T t = s.get(type, entityId);
 			consumer.accept(t);
 			s.update(t);
 			return null;
 		});
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> void delete(long entityId, Class<T> type) {
 		performAction(s -> {
-			T t = (T) s.get(type, entityId);
+			T t = s.get(type, entityId);
 			s.delete(t);
 			return null;
 		});
