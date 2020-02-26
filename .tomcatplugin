@@ -6,8 +6,8 @@
     <reloadable>true</reloadable>
     <redirectLogger>false</redirectLogger>
     <updateXml>true</updateXml>
-    <warLocation></warLocation>
+    <warLocation>C:\Users\Lisa\eclipse-workspace\Owl\target\owl.war</warLocation>
     <extraInfo></extraInfo>
     <mavenClasspath>false</mavenClasspath>
-    <webPath></webPath>
+    <webPath>owl</webPath>
 </tomcatProjectProperties>

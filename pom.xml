@@ -160,8 +160,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.1.0.Final</version>
-      <type>pom</type>
+      <version>5.4.12.Final</version>
     </dependency>
     <dependency>
       <groupId>com.sun.istack</groupId>
@@ -231,7 +230,7 @@
     <dependency>
     <groupId>org.hibernate</groupId>
     <artifactId>hibernate-core</artifactId>
-    <version>5.1.0.Final</version>
+    <version>5.4.12.Final</version>
 </dependency>
 
     <dependency>

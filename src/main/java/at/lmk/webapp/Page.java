@@ -79,7 +79,8 @@ public abstract class Page extends HttpServlet implements Container {
 	protected abstract DomContent getScript();
 
 	private ContainerTag getTopNav() {
-		return nav(a(PAGE_TITLE).withClass("navbar-brand").withHref("Index"),
+		return nav(a(img().withSrc("assets/img/owl.svg").attr("srcset", "assets/img/owl.svg").attr("height", "40"))
+				.withText("     OWL").withStyle("text-align:center").withClass("navbar-brand").withHref("Index"),
 				button(i().withClass("fas fa-bars")).withClass("btn btn-link btn-sm order-1 order-lg-0")
 						.withId("sidebarToggle"),
 				form(div(input().withClass("form-control").withType("text").withPlaceholder("Search for..."),
