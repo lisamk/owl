@@ -1,6 +1,5 @@
 package at.lmk.db;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -12,10 +11,23 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import at.lmk.db.entities.User;
+
 public class HibernateUtil {
-//	private static final Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-	private static final SessionFactory sessionFactory = new Configuration()
-			.configure(new File("./src/main/resources/hibernate.cfg.xml")).buildSessionFactory();
+
+	private static final Configuration configuration = new Configuration();
+	static {
+		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
+		configuration.setProperty("hibernate.connection.url",
+				"jdbc:mysql://owl.cpqhjjwu2vvf.us-east-2.rds.amazonaws.com:3306/owl");
+		configuration.setProperty("hibernate.connection.username", "lisa");
+		configuration.setProperty("hibernate.connection.password", "pw");
+		configuration.setProperty("hibernate.hbm2ddl.auto", "update");
+		configuration.addAnnotatedClass(User.class);
+	}
+
+	private static final SessionFactory sessionFactory = configuration.buildSessionFactory();
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
