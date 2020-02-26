@@ -14,8 +14,8 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 //	private static final Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-	private static final SessionFactory sessionFactory = new Configuration().configure(new File("hibernate.cfg.xml"))
-			.buildSessionFactory();
+	private static final SessionFactory sessionFactory = new Configuration()
+			.configure(new File("./src/main/resources/hibernate.cfg.xml")).buildSessionFactory();
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
