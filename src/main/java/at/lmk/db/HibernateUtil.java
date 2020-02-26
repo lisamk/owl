@@ -12,23 +12,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import at.lmk.db.entities.User;
+
 public class HibernateUtil {
 
 	private static final Configuration configuration = new Configuration().configure(new File("hibernate.cfg.xml"));
-//	static {
-//		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-//		configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-//		configuration.setProperty("hibernate.connection.url",
-//				"jdbc:mysql://owl.cpqhjjwu2vvf.us-east-2.rds.amazonaws.com:3306/owl");
-//		configuration.setProperty("hibernate.connection.username", "lisa");
-//		try {
-//			configuration.setProperty("hibernate.connection.password", new String(Files.readAllBytes(Paths.get("./hibpw.txt"))));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		configuration.setProperty("hibernate.hbm2ddl.auto", "update");
-//		configuration.addAnnotatedClass(User.class);
-//	}
+	static {
+		configuration.addAnnotatedClass(User.class);
+	}
 
 	private static final SessionFactory sessionFactory = configuration.buildSessionFactory();
 
