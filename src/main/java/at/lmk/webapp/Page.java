@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
 
-public abstract class Page extends HttpServlet implements Container {
+public abstract class Page extends HttpServlet implements Tags {
 
 	private enum Block {
-		CORE(BlockEntry.INDEX), INTERFACE(BlockEntry.TABLES, BlockEntry.CHARTS), ADDONS;
+		CORE(BlockEntry.INDEX), INTERFACE(BlockEntry.TABLES, BlockEntry.C_AREA, BlockEntry.C_PIE), ADDONS;
 
 		BlockEntry[] pages;
 
@@ -28,7 +28,7 @@ public abstract class Page extends HttpServlet implements Container {
 
 	public enum BlockEntry {
 		INDEX("Home", "Index", "fas fa-tachometer-alt"), TABLES("Tables", "Tables", "fas fa-table"),
-		CHARTS("Charts", "Charts", "fas fa-chart-pie");
+		C_AREA("Area Chart", "AreaChart", "fas fa-chart-area"), C_PIE("Pie Chart", "PieChart", "fas fa-chart-pie");
 
 		String name;
 		String href;

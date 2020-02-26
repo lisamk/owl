@@ -1,6 +1,5 @@
 package at.lmk.db;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -10,18 +9,16 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import at.lmk.db.entities.User;
 
 public class HibernateUtil {
 
-	private static final Configuration configuration = new Configuration().configure(new File("hibernate.cfg.xml"));
 	static {
-		configuration.addAnnotatedClass(User.class);
+		HibernateConfiguration.configuration.addAnnotatedClass(User.class);
 	}
 
-	private static final SessionFactory sessionFactory = configuration.buildSessionFactory();
+	private static final SessionFactory sessionFactory = HibernateConfiguration.configuration.buildSessionFactory();
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;

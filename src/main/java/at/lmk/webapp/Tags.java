@@ -21,7 +21,7 @@ import j2html.tags.InlineStaticResource;
 import j2html.tags.Text;
 import j2html.tags.UnescapedText;
 
-interface Tags {
+public interface Tags {
 
 	/**
 	 * Generic if-expression to do if'ing inside method calls

@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import at.lmk.webapp.Container;
+import at.lmk.webapp.components.Table;
 import j2html.tags.DomContent;
 
-public class TableListImpl<T> implements TableList<T>, Container {
+public class TableListImpl<T> implements TableList<T> {
 
 	private String title;
 	private boolean showHeader;
@@ -71,7 +71,7 @@ public class TableListImpl<T> implements TableList<T>, Container {
 
 	@Override
 	public DomContent render() {
-		return table(getTitle(), showHeader(), showFooter(), getHeadings(), getData());
+		return new Table(getTitle(), showHeader(), showFooter(), getHeadings(), getData()).render();
 	}
 
 }
