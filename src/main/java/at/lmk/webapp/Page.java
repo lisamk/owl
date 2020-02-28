@@ -1,23 +1,17 @@
 package at.lmk.webapp;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import at.lmk.webapp.pages.EmptyPage;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
 
-public abstract class Page extends HttpServlet implements Tags {
+public abstract class Page extends EmptyPage implements Tags {
 
 	private enum Block {
-		CORE(BlockEntry.INDEX), INTERFACE(BlockEntry.TABLES, BlockEntry.C_AREA, BlockEntry.C_PIE), ADDONS;
+		CORE(BlockEntry.INDEX), INTERFACE(BlockEntry.TABLES), CHARTS(BlockEntry.AREACHARTPAGE, BlockEntry.PIECHARTPAGE);
 
 		BlockEntry[] pages;
 
@@ -28,7 +22,8 @@ public abstract class Page extends HttpServlet implements Tags {
 
 	public enum BlockEntry {
 		INDEX("Home", "Index", "fas fa-tachometer-alt"), TABLES("Tables", "Tables", "fas fa-table"),
-		C_AREA("Area Chart", "AreaChart", "fas fa-chart-area"), C_PIE("Pie Chart", "PieChart", "fas fa-chart-pie");
+		AREACHARTPAGE("Area Chart", "AreaChart", "fas fa-chart-area"),
+		PIECHARTPAGE("Pie Chart", "PieChart", "fas fa-chart-pie");
 
 		String name;
 		String href;
@@ -43,40 +38,13 @@ public abstract class Page extends HttpServlet implements Tags {
 
 	private static final long serialVersionUID = -2283378096598115276L;
 
-	private static final String PAGE_TITLE = "Titel";
-
 	public abstract DomContent getContents();
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-
-		out.write(render(this));
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
-
-	private String render(Page page) {
-		return document(html(getHead(PAGE_TITLE), body(getBodyContent(page)).withClass("sb-nav-fixed")));
-	}
-
-	private DomContent[] getBodyContent(Page page) {
-		List<DomContent> content = new ArrayList<>();
+	protected void getPageContent(List<DomContent> content) {
 		content.add(getTopNav());
-		content.add(getContent(page));
-		for (DomContent d : getScripts())
-			content.add(d);
-		if (getScript() != null)
-			content.add(getScript());
-		return content.toArray(new DomContent[content.size()]);
+		content.add(getContent());
 	}
-
-	protected abstract DomContent getScript();
 
 	private ContainerTag getTopNav() {
 		return nav(a(img().withSrc("assets/img/owl.svg").attr("srcset", "assets/img/owl.svg").attr("height", "40"))
@@ -118,15 +86,15 @@ public abstract class Page extends HttpServlet implements Tags {
 		return blocks.toArray(new DomContent[blocks.size()]);
 	}
 
-	private DomContent getContent(Page page) {
-		return div(getSideNav(), getMain(page)).withId("layoutSidenav");
+	private DomContent getContent() {
+		return div(getSideNav(), getMain()).withId("layoutSidenav");
 	}
 
-	private DomContent getMain(Page page) {
-		return div(main(div(h1(page.getTitle()).withClass("mt-4"),
-				ol(li(page.getTitle()).withClass("breadcrumb-item active"))
-						.withClass("breadcrumb mb-4"),
-				div(page.getContents())).withClass("container-fluid")),
+	private DomContent getMain() {
+		return div(
+				main(div(h1(getTitle()).withClass("mt-4"),
+						ol(li(getTitle()).withClass("breadcrumb-item active")).withClass("breadcrumb mb-4"),
+						div(getContents())).withClass("container-fluid")),
 				footer(div(div(div(
 						div(text("Copyright "), rawHtml("&copy;"),
 								text(" " + PAGE_TITLE + " " + Calendar.getInstance().get(Calendar.YEAR)))
@@ -145,6 +113,7 @@ public abstract class Page extends HttpServlet implements Tags {
 		return className;
 	}
 
+	@Override
 	public DomContent[] getScripts() {
 		return new DomContent[] {
 				script().withSrc("https://code.jquery.com/jquery-3.4.1.min.js").attr("crossorigin", "anonymous"),
@@ -159,18 +128,4 @@ public abstract class Page extends HttpServlet implements Tags {
 						.attr("crossorigin", "anonymous") };
 	}
 
-	private ContainerTag getHead(String title) {
-		return head(meta().withCharset("UTF-8"), meta().attr("http-equiv", "X-UA-Compatible").withContent("IE=edge"),
-				meta().withName("viewport").withContent("width=device-width, initial-scale=1, shrink-to-fit=no"),
-				meta().withName("description").withContent(""),
-				meta().withName("author").withContent("Lisa Maria Kritzinger"), title(title),
-				link().withRel("icon").withHref("assets/img/favicon.png"),
-				link().withRel("stylesheet").withHref("css/styles.css"),
-				link().withRel("stylesheet")
-						.withHref("https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css")
-						.attr("crossorigin", "anonymous"),
-				script().withSrc("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js")
-						.attr("crossorigin", "anonymous"));
-
-	}
 }

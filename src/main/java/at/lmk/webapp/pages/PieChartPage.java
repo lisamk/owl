@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 import javax.servlet.annotation.WebServlet;
 
-import at.lmk.webapp.Page;
+import at.lmk.webapp.ScriptPage;
 import at.lmk.webapp.components.charts.PieChart;
 import j2html.tags.DomContent;
 
 @WebServlet("/PieChart")
-public class PieChartPage extends Page {
+public class PieChartPage extends ScriptPage {
 
 	private static final long serialVersionUID = -6858360971345145800L;
 	private HashMap<String, Double> map;
@@ -31,7 +31,7 @@ public class PieChartPage extends Page {
 	}
 
 	@Override
-	protected DomContent getScript() {
+	public DomContent getScript() {
 		return chart.getChartScript();
 	}
 }

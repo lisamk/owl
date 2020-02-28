@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 @Entity
 @Table(name = "User")
 public class User {
@@ -32,7 +34,7 @@ public class User {
 		this.email = email;
 		this.firstname = firstName;
 		this.lastname = lastName;
-		this.password = password;
+		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
 		return this;
 	}
 

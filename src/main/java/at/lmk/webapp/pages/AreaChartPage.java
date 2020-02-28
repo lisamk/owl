@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 import javax.servlet.annotation.WebServlet;
 
-import at.lmk.webapp.Page;
+import at.lmk.webapp.ScriptPage;
 import at.lmk.webapp.components.charts.AreaChart;
 import j2html.tags.DomContent;
 
 @WebServlet("/AreaChart")
-public class AreaChartPage extends Page {
+public class AreaChartPage extends ScriptPage {
 
 	private static final long serialVersionUID = -6858360971345145800L;
 	private HashMap<String, Double> map;
@@ -34,7 +34,7 @@ public class AreaChartPage extends Page {
 	}
 
 	@Override
-	protected DomContent getScript() {
+	public DomContent getScript() {
 		return chart.getChartScript();
 	}
 }

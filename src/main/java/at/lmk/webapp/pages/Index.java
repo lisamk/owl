@@ -15,9 +15,4 @@ public class Index extends Page {
 		return text("Hallo!");
 	}
 
-	@Override
-	protected DomContent getScript() {
-		return null;
-	}
-
 }

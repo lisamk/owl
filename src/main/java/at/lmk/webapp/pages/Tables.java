@@ -25,10 +25,4 @@ public class Tables extends Page {
 		tableList.setData(HibernateUtil.list(User.class));
 		return tableList.render();
 	}
-
-	@Override
-	protected DomContent getScript() {
-		return null;
-	}
-
 }
