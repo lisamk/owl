@@ -24,10 +24,14 @@ public class SessionUtil {
 		String agent = getAgent(request);
 		String ip = getIp(request);
 		Date d = new Date();
-		if (sessions.containsKey(agent + ip)
-				&& TimeUnit.MINUTES.convert(Math.abs(d.getTime() - sessions.get(agent + ip).getTimestamp().getTime()),
-						TimeUnit.MILLISECONDS) < COOLDOWN)
-			return true;
+		if (sessions.containsKey(agent + ip)) {
+			if (TimeUnit.MINUTES.convert(Math.abs(d.getTime() - sessions.get(agent + ip).getTimestamp().getTime()),
+					TimeUnit.MILLISECONDS) < COOLDOWN)
+				return true;
+			else
+				sessions.remove(agent + ip);
+		}
+
 		List<UserSession> sessions = HibernateUtil.list(UserSession.class);
 		for (UserSession s : sessions) {
 			if (s.getAgent().equals(agent) && s.getIp().equals(ip)) {

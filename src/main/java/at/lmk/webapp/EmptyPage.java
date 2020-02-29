@@ -30,7 +30,7 @@ public abstract class EmptyPage extends HttpServlet implements Tags {
 
 		boolean isLoggedIn = SessionUtil.checkForUserLogin(request);
 
-		if (isLoggedIn && this instanceof Login)
+		if (isLoggedIn && this instanceof Login && !Boolean.valueOf(request.getParameter("logout")))
 			response.sendRedirect("Index");
 		else if (isLoggedIn || this instanceof Login) {
 			PrintWriter out = response.getWriter();
