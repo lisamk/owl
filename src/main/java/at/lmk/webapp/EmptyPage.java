@@ -1,4 +1,4 @@
-package at.lmk.webapp.pages;
+package at.lmk.webapp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import at.lmk.db.HibernateUtil;
-import at.lmk.webapp.ScriptPage;
-import at.lmk.webapp.Tags;
+import at.lmk.db.SessionUtil;
+import at.lmk.webapp.pages.Login;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
 
@@ -29,22 +28,17 @@ public abstract class EmptyPage extends HttpServlet implements Tags {
 			throws ServletException, IOException {
 		this.request = request;
 
-		String agent = request.getHeader("User-Agent");
-		String ip = request.getHeader("X-FORWARDED-FOR");
-		if (ip == null)
-			ip = request.getRemoteAddr();
-		System.out.println(agent + "  " + ip);
+		boolean isLoggedIn = SessionUtil.checkForUserLogin(request);
 
-		boolean mayRender = this instanceof Login || HibernateUtil.checkForUserLogin(agent, ip);
-
-		if (mayRender) {
+		if (isLoggedIn && this instanceof Login)
+			response.sendRedirect("Index");
+		else if (isLoggedIn || this instanceof Login) {
 			PrintWriter out = response.getWriter();
 			out.write(render(this));
-		} else if (HibernateUtil.login(request.getParameter("login"), request.getParameter("password"), agent, ip)) {
+		} else if (SessionUtil.login(request))
 			response.sendRedirect(request.getServletPath().substring(1));
-		} else {
+		else
 			response.sendRedirect("Login?return=" + request.getServletPath().substring(1));
-		}
 
 	}
 

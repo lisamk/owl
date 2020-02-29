@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import at.lmk.webapp.pages.EmptyPage;
+import at.lmk.db.SessionUtil;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
 
@@ -61,7 +61,7 @@ public abstract class Page extends EmptyPage implements Tags {
 						div(a("Settings").withClass("dropdown-item").withHref("#"),
 								a("Activity Log").withClass("dropdown-item").withHref("#"),
 								div().withClass("dropdown-divider"),
-								a("Logout").withClass("dropdown-item").withHref("#"))
+								a("Logout").withClass("dropdown-item").withHref("Login?logout=true"))
 										.withClass("dropdown-menu dropdown-menu-right")
 										.attr("aria-labelledby", "userDropdown")).withClass("nav-item dropdown"))
 												.withClass("navbar-nav ml-auto ml-md-0")).withClass(
@@ -70,9 +70,9 @@ public abstract class Page extends EmptyPage implements Tags {
 
 	private DomContent getSideNav() {
 		return div(nav(div(div(getSideNavBlocks()).withClass("nav")).withClass("sb-sidenav-menu"),
-				div(div("Logged in as:").withClass("small")).withText("Start Bootstrap").withClass("sb-sidenav-footer"))
-						.withClass("sb-sidenav accordion sb-sidenav-dark").withId("sidenavAccordion"))
-								.withId("layoutSidenav_nav");
+				div(div("Logged in as:").withClass("small")).withText(SessionUtil.getUser(request).getFirstName())
+						.withClass("sb-sidenav-footer")).withClass("sb-sidenav accordion sb-sidenav-dark")
+								.withId("sidenavAccordion")).withId("layoutSidenav_nav");
 	}
 
 	private DomContent[] getSideNavBlocks() {
